@@ -1,5 +1,6 @@
 package com.bangkit.dermaapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,24 +23,22 @@ class SignUpActivity : AppCompatActivity() {
             val password = binding.edtPassword.text.trim().toString()
             if (email.isNotEmpty() || password.isNotEmpty()){
                 createUser(email, password)
-                Toast.makeText(this, "sudah terisi", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Berhasil daftar", Toast.LENGTH_LONG).show()
             }else{
                 Toast.makeText(this, "Email dan password tolong di isi :)", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    fun createUser(email: String, password: String){
+    private fun createUser(email: String, password: String){
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this){ task ->
                     if (task.isSuccessful){
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
                         Log.e("TASK MESSAGE", "successful")
-
-
                     } else {
-
                         Log.e("TASK MESSAGE","failed")
-
                     }
                 }
 
