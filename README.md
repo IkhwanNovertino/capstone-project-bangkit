@@ -8,7 +8,7 @@
 
 
 ## Android Steps
-1. Create Login using Firebase Authentication
+1. Create Login and Sign Up using Firebase Authentication
 2. Create Detail User
 3. Create mechanism for capture image with camera or select picture from gallery
 4. Create mechanism for convert image using base64 and upload image using retrofit to API
