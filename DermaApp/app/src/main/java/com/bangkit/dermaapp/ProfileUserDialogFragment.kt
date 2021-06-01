@@ -123,6 +123,8 @@ class ProfileUserDialogFragment : DialogFragment() {
                     }
                 }
         }
+
+        binding.btnLogout.setOnClickListener { logout() }
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -183,6 +185,16 @@ class ProfileUserDialogFragment : DialogFragment() {
             binding.tvSendLinkVerifEmail.text = "Tekan untuk verifikasi email"
         }
     }
+
+    private fun logout(){
+      fbAuth.signOut()
+        /*Intent(this, MainActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(it)
+        }*/
+        activity?.finish()
+    }
+
 
 
 }
