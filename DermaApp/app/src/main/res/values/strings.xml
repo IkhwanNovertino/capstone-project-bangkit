@@ -14,4 +14,10 @@
     <string name="have_acc">Sudah punya akun?</string>
 
     <string name="hallo">Hallo,</string>
+    <string name="scan_indication">Periksa Gejala</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="prediction">Prediksi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

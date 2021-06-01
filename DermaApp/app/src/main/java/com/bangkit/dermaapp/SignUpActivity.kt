@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -47,28 +48,28 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun createUser(email: String, password: String) {
+        loading(true)
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Intent(this, HomeActivity::class.java).also {
-                            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(it)
-                        }
-                        Log.e("TASK MESSAGE", "successful")
-                    } else {
-                        Log.e("TASK MESSAGE", "failed")
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    loading(false)
+                    Intent(this, ProfileUserActivity::class.java).also {
+                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(it)
                     }
+                    Log.e("TASK MESSAGE", "successful")
+                } else {
+                    Log.e("TASK MESSAGE", "failed")
+                    loading(false)
                 }
+            }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            Intent(this, HomeActivity::class.java).also {
-                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(it)
-            }
+    private fun loading(load: Boolean) {
+        if (load) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 }
