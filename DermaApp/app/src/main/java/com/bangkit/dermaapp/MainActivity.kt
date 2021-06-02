@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
-            val email = binding.edtEmail.text.trim().toString()
-            val password = binding.edtPassoword.text.trim().toString()
+            val email = binding.edtEmail.text?.trim().toString()
+            val password = binding.edtPassword.text?.trim().toString()
             val validEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
             if (email.isEmpty() || !validEmail) {
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (password.isEmpty() || password.length < 6) {
-                binding.edtPassoword.error = "Password kurang dari 6"
-                binding.edtPassoword.requestFocus()
+                binding.edtPassword.error = "Password kurang dari 6"
+                binding.edtPassword.requestFocus()
 
             }
 
@@ -44,12 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.tvCreateUser.setOnClickListener {
+        binding.signup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
-        binding.tvForgetPassword.setOnClickListener {
+        binding.forgetPassword.setOnClickListener {
             val intent = Intent(this, ForgetPasswordActivity::class.java)
             startActivity(intent)
         }

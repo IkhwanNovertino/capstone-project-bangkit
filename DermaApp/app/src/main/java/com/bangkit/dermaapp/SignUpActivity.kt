@@ -19,10 +19,10 @@ class SignUpActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.btnCreate.setOnClickListener {
+        binding.btncreate.setOnClickListener {
 
-            val email = binding.edtEmail.text.trim().toString()
-            val password = binding.edtPassword.text.trim().toString()
+            val email = binding.edtEmail.text?.trim().toString()
+            val password = binding.edtPassword.text?.trim().toString()
             val validEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
             if (email.isEmpty() || !validEmail) {
@@ -41,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
 
         }
 
-        binding.tvLogin.setOnClickListener {
+        binding.login.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

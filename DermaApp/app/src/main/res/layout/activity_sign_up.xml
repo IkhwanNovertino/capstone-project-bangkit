@@ -1,124 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:theme="@style/Theme.DermaFriends">
+    android:background="@color/grey"
+    android:theme="@style/Theme.DermaFriends"
+    tools:context=".SignUpActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Daftar"
+        android:textColor="@color/super_dark_green"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, Selamat datang di Derma App !"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/text1"
+        app:layout_constraintStart_toStartOf="@+id/text1"
+        app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfieldemail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp"
-        tools:context=".MainActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        android:hint="Email"
+        app:hintTextColor="@color/light_green"
+        app:boxBackgroundColor="#FAFCFF"
+        app:boxStrokeColor="@color/light_green"
+        app:placeholderTextColor="@color/light_green"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/BigText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/registration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/welcome_registration"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_email"
-            android:layout_width="0dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/grey"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/edt_email"
-            app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfieldpassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Password"
+        app:hintTextColor="@color/light_green"
+        app:boxBackgroundColor="#FAFCFF"
+        app:boxStrokeColor="@color/light_green"
+        app:placeholderTextColor="@color/light_green"
+        app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textfieldemail">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_password"
-            android:layout_width="0dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/grey"
-            android:ems="10"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btn_create"
-            style="@style/ButtonGeneral"
-            android:layout_width="126dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/registration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/have_acc"
+    <Button
+        android:id="@+id/btncreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:paddingHorizontal="36dp"
+        android:paddingVertical="12dp"
+        android:text="Daftar"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/dark_green"
+        app:layout_constraintEnd_toEndOf="@+id/textfieldpassword"
+        app:layout_constraintStart_toStartOf="@+id/textfieldpassword"
+        app:layout_constraintTop_toBottomOf="@+id/textfieldpassword" />
 
-            app:layout_constraintEnd_toEndOf="@+id/btn_create"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/btn_create"
-            app:layout_constraintTop_toBottomOf="@+id/btn_create" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Sudah punya akun ?"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btncreate"
+        app:layout_constraintStart_toStartOf="@+id/btncreate"
+        app:layout_constraintTop_toBottomOf="@+id/btncreate" />
 
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/login"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Masuk"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+<!--    -->
+<!--        <EditText-->
+<!--            android:id="@+id/edt_email"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="31dp"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/grey"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textView3"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView3" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/edt_password"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="31dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/grey"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textPassword"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.25"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textView4"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView4" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_create"-->
+<!--            style="@style/ButtonGeneral"-->
+<!--            android:layout_width="126dp"-->
+<!--            android:layout_height="51dp"-->
+<!--            android:layout_marginTop="56dp"-->
+<!--            android:text="@string/registration"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/edt_password" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textView6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="@string/have_acc"-->
+
+<!--            app:layout_constraintEnd_toEndOf="@+id/btn_create"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/btn_create"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btn_create" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_login"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:text="@string/login"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/textView6"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textView6"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -131,6 +208,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
