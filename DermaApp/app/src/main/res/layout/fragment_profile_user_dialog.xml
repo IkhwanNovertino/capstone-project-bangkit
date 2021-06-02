@@ -2,9 +2,11 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="8dp"
+    android:background="@color/grey"
     tools:context=".ProfileUserDialogFragment">
 
     <LinearLayout
@@ -33,8 +35,18 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Nama">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:hintTextColor="@color/light_green"
+            app:boxBackgroundColor="#FAFCFF"
+            app:boxStrokeColor="@color/light_green"
+            app:placeholderTextColor="@color/light_green"
+            app:boxStrokeWidth="2dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            android:hint="Nama Lengkap">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_name"
@@ -49,7 +61,18 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:hintTextColor="@color/light_green"
+            app:boxBackgroundColor="#FAFCFF"
+            app:boxStrokeColor="@color/light_green"
+            app:placeholderTextColor="@color/light_green"
+            app:boxStrokeWidth="2dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
             android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -99,22 +122,29 @@
 
         <Button
             android:id="@+id/btn_save"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Save" />
+            android:layout_marginTop="14dp"
+            android:paddingHorizontal="36dp"
+            android:paddingVertical="12dp"
+            android:text="Simpan" />
 
         <Button
             android:id="@+id/btn_logout"
-            android:layout_width="300dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Logout" />
+            android:layout_marginTop="1dp"
+            android:paddingHorizontal="36dp"
+            android:paddingVertical="12dp"
+            android:text="Keluar"
+            android:textColor="@color/purple_500"/>
 
 
     </LinearLayout>
-
 
 </androidx.core.widget.NestedScrollView>
