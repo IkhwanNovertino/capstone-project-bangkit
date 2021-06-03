@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         showUser()
 
 
-        binding.btnScan.setOnClickListener {
+        binding.btnCamera.setOnClickListener {
             //test retrofit mechanism scan disease with retrofit
             //  val intent = Intent(this, RetrofitExaminationActivity::class.java)
 
@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
             showDialogFragmentProfile()
         }
 
-        binding.btnProfile.setOnClickListener {
+        binding.layoutHeader.setOnClickListener {
             showDialogFragmentProfile()
         }
 
@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
                     .into(binding.imgUserHome)
             }
 
-            binding.tvNameUser.text = user.displayName
+            binding.tvUsername.text = user.displayName
 
         }
     }
