@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_splash"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -31,15 +33,15 @@
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Muhammad Ikhwan"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="25dp"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="16dp"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textHello"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:text="Muhammad Ikhwan" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgUserHome"
@@ -112,30 +114,65 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Riwayat Periksa :"
-        android:textColor="@color/super_dark_green"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="320dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/light_green"
+        app:cardCornerRadius="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRiwayat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:listitem="@layout/item_riwayat" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-<!--    <Button-->
+            <TextView
+                android:id="@+id/tv_riwayat_pemeriksaan"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text="Riwayat"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_riwayat_pemeriksaan"
+                android:layout_marginStart="12dp"
+                android:text="Pemeriksaan"
+                android:textColor="@color/white"
+                android:textSize="26sp" />
+
+            <Button
+                android:id="@+id/btn_history"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:padding="4dp"
+                android:text="GO"
+                app:icon="@drawable/ic_arrow_forward"
+                app:iconGravity="end"
+                app:iconPadding="1dp" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!--    <Button-->
 <!--        android:id="@+id/btn_scan"-->
 <!--        android:layout_width="150dp"-->
 <!--        android:layout_height="150dp"-->

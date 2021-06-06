@@ -1,8 +1,10 @@
 package com.bangkit.dermaapp
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -11,8 +13,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.bangkit.dermaapp.databinding.FragmentProfileUserDialogBinding
+import com.bangkit.dermaapp.notretrofit.ExaminationActivity
+import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -129,14 +135,22 @@ class ProfileUserDialogFragment : DialogFragment() {
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun camera() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-            activity?.packageManager?.let {
-                intent.resolveActivity(it).also {
-                    startActivityForResult(intent, REQUEST_CAMERA_USER)
-                }
-            }
+        if (ContextCompat.checkSelfPermission(
+                activity!!,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, ExaminationActivity.CAMERA_REQUEST_CODE)
+        } else {
+            ActivityCompat.requestPermissions(
+                activity!!,
+                arrayOf(Manifest.permission.CAMERA),
+                ExaminationActivity.CAMERA_PERMISSION_CODE)
         }
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -185,6 +199,25 @@ class ProfileUserDialogFragment : DialogFragment() {
             binding.tvSendLinkVerifEmail.text = "Tekan untuk verifikasi email"
         }
     }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RetrofitExaminationActivity.CAMERA_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, RetrofitExaminationActivity.CAMERA_REQUEST_CODE)
+            } else {
+                Toast.makeText(activity, "BLM ADA PERMISSION KK", Toast.LENGTH_LONG).show()
+            }
+
+        }
+    }
+
 
     private fun logout(){
       fbAuth.signOut()

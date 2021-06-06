@@ -1,14 +1,23 @@
 package com.bangkit.dermaapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivityHomeBinding
+import com.bangkit.dermaapp.history.adapter.HistoryAdapter
+import com.bangkit.dermaapp.history.entity.HistoryPenyakit
+import com.bangkit.dermaapp.history.entity.User
+import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivityHomeBinding
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,13 +32,16 @@ class HomeActivity : AppCompatActivity() {
         showUser()
 
 
+
+        //val historyId = HistoryPenyakit().id.toString()
+
         binding.btnCamera.setOnClickListener {
             //test retrofit mechanism scan disease with retrofit
-            //  val intent = Intent(this, RetrofitExaminationActivity::class.java)
+            val intent = Intent(this, RetrofitExaminationActivity::class.java)
 
             //test retrofit mechanism scan disease with not retrofit
             //val intent = Intent(this, ExaminationActivity::class.java)
-            //  startActivity(intent)
+            startActivity(intent)
         }
 
         binding.imgUserHome.setOnClickListener {
@@ -40,8 +52,15 @@ class HomeActivity : AppCompatActivity() {
             showDialogFragmentProfile()
         }
 
+        binding.btnHistory.setOnClickListener {
+            val intent = Intent(this, DiseaseHistoryActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
+
+
 
 
     private fun showUser() {
@@ -58,8 +77,8 @@ class HomeActivity : AppCompatActivity() {
             }
 
             binding.tvUsername.text = user.displayName
-
         }
+
     }
 
     private fun showDialogFragmentProfile() {
@@ -71,4 +90,5 @@ class HomeActivity : AppCompatActivity() {
             ProfileUserDialogFragment::class.java.simpleName
         )
     }
+
 }

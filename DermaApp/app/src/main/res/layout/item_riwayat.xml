@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cvRiwayat"
-    android:layout_width="380dp"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_penyakit"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tv_penyakit_by_sistem"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="16dp">
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/img_penyakit"
+        app:layout_constraintTop_toTopOf="@+id/img_penyakit"
+        tools:text="Kurap" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgDetection"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/super_dark_green" />
+    <TextView
+        android:id="@+id/tv_penyakit_by_dokter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_nama_dokter"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_nama_dokter"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_dokter"
+        tools:text="Kudis" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgDetection"
-            app:layout_constraintStart_toEndOf="@+id/imgDetection"
-            app:layout_constraintTop_toTopOf="@+id/imgDetection"
-            tools:text="Pemeriksaan 1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tv_nama_dokter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_penyakit_by_sistem"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_penyakit_by_sistem"
+        app:layout_constraintTop_toBottomOf="@+id/tv_penyakit_by_sistem"
+        tools:text="Dr. Dimas Efendi" />
+</androidx.constraintlayout.widget.ConstraintLayout>
