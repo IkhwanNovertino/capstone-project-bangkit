@@ -5,7 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.dermaapp.databinding.ActivityDiseaseHistoryBinding
-import com.bangkit.dermaapp.history.adapter.HistoryAdapter
+import com.bangkit.dermaapp.history.adapter.HistoryAllUserAdapter
+import com.bangkit.dermaapp.history.adapter.HistoryUserAdapter
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -17,10 +18,10 @@ class DiseaseHistoryActivity : AppCompatActivity() {
     private lateinit var refUser: DatabaseReference
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var historyAllUserAdapter: HistoryAllUserAdapter
+    private lateinit var historyUserAdapter: HistoryUserAdapter
 
 
-    private lateinit var historyPenyakitList: MutableList<HistoryPenyakit>
     private var historyPenyakitListArray = ArrayList<HistoryPenyakit>()
 
     companion object {
@@ -35,12 +36,7 @@ class DiseaseHistoryActivity : AppCompatActivity() {
         supportActionBar?.title = "Riwayat Pemeriksaan"
 
         firebaseAuth = FirebaseAuth.getInstance()
-        historyAdapter = HistoryAdapter()
-        with(binding.rvHistory) {
-            layoutManager = LinearLayoutManager(this@DiseaseHistoryActivity)
-            setHasFixedSize(true)
-            adapter = historyAdapter
-        }
+
 
         val uid = firebaseAuth.currentUser?.uid.toString()
 
@@ -56,16 +52,21 @@ class DiseaseHistoryActivity : AppCompatActivity() {
         //testRecyclerView()
 
 
-
-
     }
 
     private fun showHistoryAllUser() {
+        historyAllUserAdapter = HistoryAllUserAdapter()
+        with(binding.rvHistory) {
+            layoutManager = LinearLayoutManager(this@DiseaseHistoryActivity)
+            setHasFixedSize(true)
+            adapter = historyAllUserAdapter
+        }
+
         refAllHistory.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(child: DataSnapshot) {
                 historyPenyakitListArray.clear()
                 if (child.exists()) {
-                  //  historyPenyakitListArray.clear()
+                    //  historyPenyakitListArray.clear()
                     Log.d("ALL CHILD", child.toString())
                     for (h in child.children) {
                         val key = h.key
@@ -82,7 +83,7 @@ class DiseaseHistoryActivity : AppCompatActivity() {
                         Log.d("TAG atas 8", child.value.toString())
                         Log.d("TAG atas 9", "------------------")
                     }
-                    val BA = historyAdapter.setHistory(historyPenyakitListArray)
+                    val BA = historyAllUserAdapter.setHistoryAllUsers(historyPenyakitListArray)
                     Log.d("TAGBA", BA.toString())
                     Log.d("TAGBA", historyPenyakitListArray.toString())
                     /*   val adapterHistoryPenyakit = HistoryAdapter(
@@ -118,8 +119,8 @@ class DiseaseHistoryActivity : AppCompatActivity() {
                     historyPenyakitListArray.add(historyPenyakit!!)
                 }
 
-                val assd = historyAdapter.setHistory(historyPenyakitListArray)
-                Log.d("TAGBA", assd.toString())
+                historyAllUserAdapter.setHistoryAllUsers(historyPenyakitListArray)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -132,18 +133,26 @@ class DiseaseHistoryActivity : AppCompatActivity() {
     }
 
     private fun showHistoryByUser() {
-        historyPenyakitList = mutableListOf()
+        historyUserAdapter = HistoryUserAdapter()
+        with(binding.rvHistory) {
+            layoutManager = LinearLayoutManager(this@DiseaseHistoryActivity)
+            setHasFixedSize(true)
+            adapter = historyUserAdapter
+        }
+
+
         try {
             refHistoryByUser.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     if (p0.exists()) {
-                        historyPenyakitList.clear()
+                        historyPenyakitListArray.clear()
                         for (h in p0.children) {
                             val historyPenyakit = h.getValue(HistoryPenyakit::class.java)
                             if (historyPenyakit != null) {
-                                historyPenyakitList.add(historyPenyakit)
+                                historyPenyakitListArray.add(historyPenyakit)
                             }
                         }
+                        historyUserAdapter.setHistoryUser(historyPenyakitListArray)
 
 
                         /*val adapterHistoryPenyakit = HistoryAdapter(
@@ -193,7 +202,6 @@ class DiseaseHistoryActivity : AppCompatActivity() {
         })
 
     }
-
 
 
 }

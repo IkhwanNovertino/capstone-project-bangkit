@@ -11,11 +11,11 @@ import com.bangkit.dermaapp.history.entity.HistoryPenyakit
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAllUserAdapter : RecyclerView.Adapter<HistoryAllUserAdapter.HistoryViewHolder>() {
 
     private var listHistory = ArrayList<HistoryPenyakit>()
 
-    fun setHistory(history: ArrayList<HistoryPenyakit>) {
+    fun setHistoryAllUsers(history: ArrayList<HistoryPenyakit>) {
 
             this.listHistory.clear()
             this.listHistory.addAll(history)
@@ -51,6 +51,8 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() 
                     )
                     itemView.context.startActivity(intent)
                 }
+
+
             }
         }
 
@@ -59,13 +61,13 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HistoryAdapter.HistoryViewHolder {
+    ): HistoryAllUserAdapter.HistoryViewHolder {
         val itemHistoryBinding =
             ItemRiwayatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryViewHolder(itemHistoryBinding)
     }
 
-    override fun onBindViewHolder(holder: HistoryAdapter.HistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoryAllUserAdapter.HistoryViewHolder, position: Int) {
         holder.bind(listHistory[position])
     }
 
