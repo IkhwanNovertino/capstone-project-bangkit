@@ -14,9 +14,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bangkit.dermaapp.DiseaseHistoryActivity.Companion.FIREBASE_URL
 import com.bangkit.dermaapp.databinding.ActivityProfileUserBinding
 import com.bangkit.dermaapp.history.entity.User
-import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -32,6 +32,11 @@ class ProfileUserActivity : AppCompatActivity() {
     private lateinit var imageUri: Uri
     private lateinit var refUser : DatabaseReference
 
+    companion object{
+        private const val REQ_CAMERA_USER = 123
+        private const val PER_CAMERA_USER = 321
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileUserBinding.inflate(layoutInflater)
@@ -39,7 +44,7 @@ class ProfileUserActivity : AppCompatActivity() {
         fbAuth = FirebaseAuth.getInstance()
         val user = fbAuth.currentUser
 
-        refUser = FirebaseDatabase.getInstance("https://b21-cap0391-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
+        refUser = FirebaseDatabase.getInstance(FIREBASE_URL).getReference("users")
 
         if (user != null) {
             if (user.photoUrl != null) {
@@ -101,7 +106,7 @@ class ProfileUserActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ProfileUserDialogFragment.REQUEST_CAMERA_USER && resultCode == RESULT_OK) {
+        if (requestCode == REQ_CAMERA_USER && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             uploadImageUser(imageBitmap)
         }
@@ -115,12 +120,12 @@ class ProfileUserActivity : AppCompatActivity() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, RetrofitExaminationActivity.CAMERA_REQUEST_CODE)
+            startActivityForResult(intent, REQ_CAMERA_USER)
         } else {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.CAMERA),
-                RetrofitExaminationActivity.CAMERA_PERMISSION_CODE
+                PER_CAMERA_USER
             )
         }
     }
@@ -131,10 +136,10 @@ class ProfileUserActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RetrofitExaminationActivity.CAMERA_PERMISSION_CODE) {
+        if (requestCode == PER_CAMERA_USER) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, RetrofitExaminationActivity.CAMERA_REQUEST_CODE)
+                startActivityForResult(intent, REQ_CAMERA_USER)
             } else {
                 Toast.makeText(this, "BLM ADA PERMISSION KK", Toast.LENGTH_LONG).show()
             }

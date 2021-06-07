@@ -1,8 +1,8 @@
 package com.bangkit.dermaapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.DiseaseHistoryActivity.Companion.FIREBASE_URL
 import com.bangkit.dermaapp.databinding.ActivityDiseaseByDoctorBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
@@ -11,15 +11,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class DiseaseByDoctorActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityDiseaseByDoctorBinding
+    private lateinit var binding: ActivityDiseaseByDoctorBinding
     private lateinit var refHistoryPenyakit: DatabaseReference
     private lateinit var firebaseAuth: FirebaseAuth
-    companion object{
+
+    companion object {
         const val UID_HISTORY = "history_uid"
         const val ID_IMAGE = "id_key"
         const val IMG_LINK = "image_link"
         const val EXTRA_DISEASE_SYSTEM = "extra_disease_system"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDiseaseByDoctorBinding.inflate(layoutInflater)
@@ -32,7 +34,8 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         val diseaseBySystem = intent.getStringExtra(EXTRA_DISEASE_SYSTEM)
         val nameDoctor = FirebaseAuth.getInstance().currentUser?.displayName.toString()
 
-        refHistoryPenyakit = FirebaseDatabase.getInstance(FIREBASE_URL).getReference("riwayat_penyakit")
+        refHistoryPenyakit =
+            FirebaseDatabase.getInstance(FIREBASE_URL).getReference("riwayat_penyakit")
 
 
         Glide.with(this)
@@ -42,16 +45,16 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         binding.edDetectionBySystem.setText(diseaseBySystem)
         binding.edDoctorName.setText(nameDoctor)
         binding.btnSave.setOnClickListener {
-          diseaseDicideByDoctor()
+            diseaseDicideByDoctor()
         }
 
         //debug
         val uid = firebaseAuth.currentUser?.uid.toString()
-       // val key = refHistoryPenyakit.child(uid).key.toString()
+        // val key = refHistoryPenyakit.child(uid).key.toString()
         val test = refHistoryPenyakit.child(uid).key.toString()
         //Log.d("THIS", test)
 
-        refHistoryPenyakit.addValueEventListener(object : ValueEventListener{
+        refHistoryPenyakit.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
                 val key = snapshot.key
@@ -110,7 +113,7 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
 
     }
 
-    private fun diseaseDicideByDoctor(){
+    private fun diseaseDicideByDoctor() {
         //val uid = firebaseAuth.currentUser?.uid.toString()
         val imageSkin = intent.getStringExtra(IMG_LINK).toString()
         val diseaseBySystem = binding.edDetectionBySystem.text.toString().trim()
@@ -125,14 +128,15 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
 
         //val mhsId = ref.push().key
         val historyPenyakit = HistoryPenyakit(
-            idKeyUid,idKeyImage,imageSkin,diseaseBySystem, doctorName, diseaseByDoctor
+            idKeyUid, idKeyImage, imageSkin, diseaseBySystem, doctorName, diseaseByDoctor
         )
 
-        refHistoryPenyakit.child(idKeyUid).child(idKeyImage).setValue(historyPenyakit).addOnCompleteListener {
-            //jika data berhasil ditambahkan
-            //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
-            Log.d("THIS", "data berhasil diUpdate")
-        }
+        refHistoryPenyakit.child(idKeyUid).child(idKeyImage).setValue(historyPenyakit)
+            .addOnCompleteListener {
+                //jika data berhasil ditambahkan
+                //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
+                Log.d("THIS", "data berhasil diUpdate")
+            }
 
     }
 }

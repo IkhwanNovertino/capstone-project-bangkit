@@ -34,7 +34,8 @@ class ProfileUserDialogFragment : DialogFragment() {
 
 
     companion object {
-        const val REQUEST_CAMERA_USER = 300
+        private const val REQ_CAMERA_USER_DIALOG = 300
+        private const val PER_CAMERA_USER_DIALOG = 333
     }
 
     override fun onCreateView(
@@ -107,11 +108,6 @@ class ProfileUserDialogFragment : DialogFragment() {
                 return@setOnClickListener
             }
 
-
-
-
-
-
             UserProfileChangeRequest.Builder()
                 .setDisplayName(name)
                 .setPhotoUri(image)
@@ -141,12 +137,12 @@ class ProfileUserDialogFragment : DialogFragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, ExaminationActivity.CAMERA_REQUEST_CODE)
+            startActivityForResult(intent, REQ_CAMERA_USER_DIALOG)
         } else {
             ActivityCompat.requestPermissions(
                 activity!!,
                 arrayOf(Manifest.permission.CAMERA),
-                ExaminationActivity.CAMERA_PERMISSION_CODE)
+                PER_CAMERA_USER_DIALOG)
         }
     }
 
@@ -154,7 +150,7 @@ class ProfileUserDialogFragment : DialogFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CAMERA_USER && resultCode == RESULT_OK) {
+        if (requestCode == REQ_CAMERA_USER_DIALOG && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             uploadImageUser(imageBitmap)
         }
@@ -207,12 +203,12 @@ class ProfileUserDialogFragment : DialogFragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RetrofitExaminationActivity.CAMERA_PERMISSION_CODE) {
+        if (requestCode == PER_CAMERA_USER_DIALOG) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, RetrofitExaminationActivity.CAMERA_REQUEST_CODE)
+                startActivityForResult(intent, REQ_CAMERA_USER_DIALOG)
             } else {
-                Toast.makeText(activity, "BLM ADA PERMISSION KK", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Pastikan sudah izin pemission camera", Toast.LENGTH_LONG).show()
             }
 
         }
