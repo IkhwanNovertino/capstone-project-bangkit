@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="4dp"
     tools:context=".DiseaseHistoryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,27 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_deleted"
         tools:listitem="@layout/item_riwayat" />
+
+    <ImageView
+        android:id="@+id/btn_deleted"
+        android:layout_width="29dp"
+        android:layout_height="24dp"
+        android:visibility="invisible"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Hapus semua riwayat"
+        android:visibility="invisible"
+        android:textColor="@color/dark_green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btn_deleted"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

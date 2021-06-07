@@ -24,6 +24,13 @@ class HistoryUserAdapter : RecyclerView.Adapter<HistoryUserAdapter.HistoryViewHo
 
     }
 
+    fun clearHistory(){
+        if (listHistory.size > 0){
+            this.listHistory.clear()
+            notifyDataSetChanged()
+        }
+    }
+
     inner class HistoryViewHolder(private val binding: ItemRiwayatBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(history: HistoryPenyakit) {
@@ -35,8 +42,8 @@ class HistoryUserAdapter : RecyclerView.Adapter<HistoryUserAdapter.HistoryViewHo
                     .into(imgPenyakit)
 
                 tvPenyakitBySistem.text = history.penyakit_berdarkan_sistem
-                tvPenyakitByDokter.text = history.penyakit_berdasar_dokter
-                tvNamaDokter.text = history.nama_dokter
+              /*  tvPenyakitByDokter.text = history.penyakit_berdasar_dokter
+                tvNamaDokter.text = history.nama_dokter*/
 
 
             }

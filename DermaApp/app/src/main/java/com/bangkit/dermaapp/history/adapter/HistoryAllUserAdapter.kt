@@ -26,6 +26,8 @@ class HistoryAllUserAdapter : RecyclerView.Adapter<HistoryAllUserAdapter.History
 
     }
 
+
+
     inner class HistoryViewHolder(private val binding: ItemRiwayatBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(history: HistoryPenyakit) {
@@ -37,9 +39,9 @@ class HistoryAllUserAdapter : RecyclerView.Adapter<HistoryAllUserAdapter.History
                     .into(imgPenyakit)
 
                 tvPenyakitBySistem.text = history.penyakit_berdarkan_sistem
-                tvPenyakitByDokter.text = history.penyakit_berdasar_dokter
+              /*  tvPenyakitByDokter.text = history.penyakit_berdasar_dokter
                 tvNamaDokter.text = history.nama_dokter
-
+*/
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DiseaseByDoctorActivity::class.java)
                     intent.putExtra(DiseaseByDoctorActivity.UID_HISTORY, history.uid)

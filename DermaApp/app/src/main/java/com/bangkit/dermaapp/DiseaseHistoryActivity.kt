@@ -2,6 +2,7 @@ package com.bangkit.dermaapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.dermaapp.databinding.ActivityDiseaseHistoryBinding
@@ -50,6 +51,11 @@ class DiseaseHistoryActivity : AppCompatActivity() {
 
 
         //testRecyclerView()
+
+        binding.btnDeleted.setOnClickListener {
+            clearHistory()
+           historyUserAdapter.clearHistory()
+        }
 
 
     }
@@ -153,14 +159,6 @@ class DiseaseHistoryActivity : AppCompatActivity() {
                             }
                         }
                         historyUserAdapter.setHistoryUser(historyPenyakitListArray)
-
-
-                        /*val adapterHistoryPenyakit = HistoryAdapter(
-                            this@DiseaseHistoryActivity,
-                            R.layout.item_riwayat,
-                            historyPenyakitList
-                        )
-                        binding.lvHistory.adapter = adapterHistoryPenyakit*/
                     }
                 }
 
@@ -184,9 +182,12 @@ class DiseaseHistoryActivity : AppCompatActivity() {
                 if (child.exists()) {
                     val userRole = child.child(uid).child("role").value.toString()
                     if (userRole == "Dokter") {
+                        showClear(false)
                         showHistoryAllUser()
+
                         Log.d("ROLE", "Hai Dokter")
                     } else {
+                        showClear(true)
                         showHistoryByUser()
                         Log.d("ROLE", "Hai User")
                     }
@@ -201,6 +202,21 @@ class DiseaseHistoryActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    private fun showClear(state: Boolean) {
+        if (state) {
+            binding.tvHistory.visibility = View.VISIBLE
+            binding.btnDeleted.visibility = View.VISIBLE
+        } else {
+            binding.tvHistory.visibility = View.GONE
+            binding.btnDeleted.visibility = View.GONE
+        }
+
+    }
+
+    private fun clearHistory() {
+        refHistoryByUser.removeValue()
     }
 
 
