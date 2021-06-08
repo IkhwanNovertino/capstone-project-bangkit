@@ -42,23 +42,13 @@
         style="@style/BigText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:gravity="center"
         android:text="Nama Penyakit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_prediction" />
-
-    <TextView
-        android:id="@+id/tv_treatment_recommendations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Rekomendasi pengobatan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_disease_name" />
 
     <Button
         android:id="@+id/btn_prediction"
@@ -70,17 +60,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_indication" />
-
-    <ImageView
-        android:id="@+id/img_segmentation"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_treatment_recommendations"
-        app:layout_constraintVertical_bias="0.923"
-        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

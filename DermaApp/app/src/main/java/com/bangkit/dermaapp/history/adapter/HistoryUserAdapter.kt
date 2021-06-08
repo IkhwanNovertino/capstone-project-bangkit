@@ -1,8 +1,16 @@
 package com.bangkit.dermaapp.history.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.dermaapp.DetailUserDiseaseActivity
+import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.DETECT_DOCTOR
+import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.DETECT_SYSTEM
+import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.IMAGE_DETAIL
+import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.NAME_DOCTOR_DETAIL
+import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.TREATMENT
+import com.bangkit.dermaapp.DiseaseByDoctorActivity
 import com.bangkit.dermaapp.R
 import com.bangkit.dermaapp.databinding.ItemRiwayatBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
@@ -42,8 +50,23 @@ class HistoryUserAdapter : RecyclerView.Adapter<HistoryUserAdapter.HistoryViewHo
                     .into(imgPenyakit)
 
                 tvPenyakitBySistem.text = history.penyakit_berdarkan_sistem
-              /*  tvPenyakitByDokter.text = history.penyakit_berdasar_dokter
-                tvNamaDokter.text = history.nama_dokter*/
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailUserDiseaseActivity::class.java)
+                    intent.putExtra(IMAGE_DETAIL, history.gambar_penyakit)
+                    intent.putExtra(DETECT_SYSTEM, history.penyakit_berdarkan_sistem)
+                    intent.putExtra(DETECT_DOCTOR, history.penyakit_berdasar_dokter)
+                    intent.putExtra(NAME_DOCTOR_DETAIL, history.nama_dokter)
+                    intent.putExtra(TREATMENT, history.rekomendasi_pengobatan)
+                    itemView.context.startActivity(intent)
+                }
+
+                if (history.penyakit_berdasar_dokter == ""){
+                    tvStatus.text = "Status : Belum diperiksa"
+                    imageStatus.setImageResource(R.drawable.ic_not_yet)
+                } else {
+                    tvStatus.text = "Status : Sudah diperiksa"
+                    imageStatus.setImageResource(R.drawable.ic_confirm)
+                }
 
 
             }

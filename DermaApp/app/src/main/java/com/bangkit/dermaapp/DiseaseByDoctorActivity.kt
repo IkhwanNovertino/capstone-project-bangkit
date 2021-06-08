@@ -20,6 +20,8 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         const val ID_IMAGE = "id_key"
         const val IMG_LINK = "image_link"
         const val EXTRA_DISEASE_SYSTEM = "extra_disease_system"
+        const val NAME_DOCTOR ="doctor_name"
+        const val EXTRA_BY_DOCTOR = "extra_by_doctor"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +34,8 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
 
         val imgLink = intent.getStringExtra(IMG_LINK)
         val diseaseBySystem = intent.getStringExtra(EXTRA_DISEASE_SYSTEM)
-        val nameDoctor = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        val nameDoctor = intent.getStringExtra(NAME_DOCTOR)
+        val diseaseByDoctor = intent.getStringExtra(EXTRA_BY_DOCTOR)
 
         refHistoryPenyakit =
             FirebaseDatabase.getInstance(FIREBASE_URL).getReference("riwayat_penyakit")
@@ -43,10 +46,11 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
             .into(binding.imageDisease)
 
         binding.edDetectionBySystem.setText(diseaseBySystem)
-        binding.edDoctorName.setText(nameDoctor)
+        binding.tvNameDoctor.text = nameDoctor
         binding.btnSave.setOnClickListener {
             diseaseDicideByDoctor()
         }
+        binding.edDetectionByDoctor.setText(diseaseByDoctor)
 
         //debug
         val uid = firebaseAuth.currentUser?.uid.toString()
@@ -117,10 +121,12 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         //val uid = firebaseAuth.currentUser?.uid.toString()
         val imageSkin = intent.getStringExtra(IMG_LINK).toString()
         val diseaseBySystem = binding.edDetectionBySystem.text.toString().trim()
-        val doctorName = binding.edDoctorName.text.toString().trim()
+        val doctorName = firebaseAuth.currentUser?.displayName.toString().trim()
         val diseaseByDoctor = binding.edDetectionByDoctor.text.toString().trim()
         val idKeyUid = intent.getStringExtra(UID_HISTORY).toString()
         val idKeyImage = intent.getStringExtra(ID_IMAGE).toString()
+        val treatment = binding.edRecommendationTreatment.text.toString().trim()
+
 
         //val idDisease = refHistoryPenyakit.
         //Log.d("THIS", idDisease.toString())
@@ -128,7 +134,7 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
 
         //val mhsId = ref.push().key
         val historyPenyakit = HistoryPenyakit(
-            idKeyUid, idKeyImage, imageSkin, diseaseBySystem, doctorName, diseaseByDoctor
+            idKeyUid, idKeyImage, imageSkin, diseaseBySystem, doctorName, diseaseByDoctor, treatment
         )
 
         refHistoryPenyakit.child(idKeyUid).child(idKeyImage).setValue(historyPenyakit)

@@ -56,33 +56,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_name_doctor"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            app:hintTextColor="@color/light_green"
-            app:boxBackgroundColor="#FAFCFF"
-            app:boxStrokeColor="@color/light_green"
-            app:placeholderTextColor="@color/light_green"
-            app:boxStrokeWidth="2dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomEnd="12dp"
-            android:hint="Nama Dokter">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_doctor_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_detection_by_doctor"
@@ -105,6 +79,52 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_detection_by_doctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diperiksa oleh :"/>
+
+            <TextView
+                android:id="@+id/tv_name_doctor"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Dr. Al Zaini"/>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_treatment"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:hintTextColor="@color/light_green"
+            app:boxBackgroundColor="#FAFCFF"
+            app:boxStrokeColor="@color/light_green"
+            app:placeholderTextColor="@color/light_green"
+            app:boxStrokeWidth="2dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            android:hint="Rekomendasi Pengobatan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_recommendation_treatment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />

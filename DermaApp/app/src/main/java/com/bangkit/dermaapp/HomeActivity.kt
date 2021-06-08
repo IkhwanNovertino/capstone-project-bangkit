@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivityHomeBinding
+import com.bangkit.dermaapp.notretrofit.ExaminationActivity
 import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth

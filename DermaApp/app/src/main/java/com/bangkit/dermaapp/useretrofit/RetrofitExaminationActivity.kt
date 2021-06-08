@@ -20,9 +20,13 @@ import androidx.core.content.ContextCompat
 import com.bangkit.dermaapp.R
 import com.bangkit.dermaapp.databinding.ActivityRetrofitExaminationBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
-import com.bangkit.dermaapp.retrofit.ApiConfig.getRetrofit
+import com.bangkit.dermaapp.useretrofit.ApiConfig.getRetrofit
 import com.bangkit.dermaapp.retrofit.ApiService
 import com.bangkit.dermaapp.retrofit.ImageResponse
+import com.bangkit.dermaapp.testretrofit.Config
+import com.bangkit.dermaapp.testretrofit.ResponseTest
+import com.bangkit.dermaapp.testretrofit.ResponseTest2
+import com.bangkit.dermaapp.testretrofit.Service
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
@@ -123,6 +127,7 @@ class RetrofitExaminationActivity : AppCompatActivity() {
         }
 
         binding.btnPrediction.setOnClickListener {
+            //uploadTestImage()
             uploadImage()
         }
 
@@ -261,6 +266,7 @@ class RetrofitExaminationActivity : AppCompatActivity() {
 
                     binding.tvDiseaseName.text = link
                     // save to database
+/*
 
                     Glide.with(this@RetrofitExaminationActivity)
                         .load(link)
@@ -268,6 +274,7 @@ class RetrofitExaminationActivity : AppCompatActivity() {
                         .error(R.drawable.ic_launcher_background)
                         .placeholder(R.drawable.ic_launcher_background)
                         .into(binding.imgSegmentation)
+*/
 
                   //  saveDataProto()
 
@@ -280,12 +287,13 @@ class RetrofitExaminationActivity : AppCompatActivity() {
                     val diseaseBySystem = "Dummy Scabies"
                     val doctorName = ""
                     val diseaseByDoctor = ""
+                    val recommendationTreatment = ""
 
                     val idDisease = refHistoryPenyakit.push().key
 
                     //val mhsId = ref.push().key
                     val historyPenyakit = HistoryPenyakit(
-                        uid,idDisease,imageSkin,diseaseBySystem, doctorName, diseaseByDoctor
+                        uid,idDisease,imageSkin,diseaseBySystem, doctorName, diseaseByDoctor, recommendationTreatment
                     )
 
                     refHistoryPenyakit.child(uid).child(idDisease!!).setValue(historyPenyakit).addOnCompleteListener {
@@ -317,9 +325,58 @@ class RetrofitExaminationActivity : AppCompatActivity() {
     }
 
 
+/*
+    private fun uploadTestImage() {
+        val title = "IMG_${System.currentTimeMillis()}"
 
-    private fun saveDiseaseHistory(){
+        val api = Config.getTestRetrofit()!!.create(Service::class.java)
+        val call = api.uploadTestImageImgur(image)
 
-    }
 
+        call.enqueue(object : Callback<ResponseTest2> {
+            override fun onResponse(
+                call: Call<ResponseTest2>,
+                response: Response<ResponseTest2>
+            ) {
+                try {
+                    val dataSemua = response.body()
+                    Log.d("Response", response.isSuccessful.toString())
+                    val dataLink = response.body()?.data
+                    val dataStatus = response.body()?.status.toString()
+                    Log.d("RESPONE DATA", dataSemua.toString())
+                    Log.d("RESPONSE SUCCESS", dataLink.toString())
+                    Log.d("RESPONSE CODE", dataStatus)
+
+                    val nameDiseaseSkin = response.body()?.data?.disease
+                    binding.tvDiseaseName.text = nameDiseaseSkin
+
+
+
+                } catch (e: Exception) {
+                    Log.d("error", e.message.toString())
+                }
+
+
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            override fun onFailure(
+                call: Call<ResponseTest2>,
+                t: Throwable
+            ) {
+                Log.d(
+                    "Error Response", "GAGAL"
+                )
+
+                Log.d(
+                    "Error Response", t.message.toString()
+                )
+                Log.d(
+                    "Error Response", t.localizedMessage!!.toString()
+                )
+            }
+
+        }
+        )
+    }*/
 }

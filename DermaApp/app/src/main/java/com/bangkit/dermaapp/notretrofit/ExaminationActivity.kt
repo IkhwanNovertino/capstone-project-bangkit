@@ -76,6 +76,7 @@ class ExaminationActivity : AppCompatActivity() {
             Log.d("TAG UPLOAD", imgurUrl)
 
 
+/*
 
             Glide.with(this@ExaminationActivity)
                 .asBitmap()
@@ -88,6 +89,7 @@ class ExaminationActivity : AppCompatActivity() {
                         super.setResource(resource)
                     }
                 })
+*/
 
             showSnackbarMessage("Ini hasilnya")
 
@@ -190,16 +192,16 @@ class ExaminationActivity : AppCompatActivity() {
                         "Authorization",
                         "Client-ID 81a44c34bb65c2c"
                     )*/
-                    /*httpsURLConnection.setRequestProperty(
+                    httpsURLConnection.setRequestProperty(
                         "Content-Type",
                         "multipart/form-data; boundary=$boundary"
-                    )*/
-                    httpsURLConnection.setRequestProperty(
+                    )
+                    /*httpsURLConnection.setRequestProperty(
                         "Content-type","application/json"
-                    )
-                    httpsURLConnection.setRequestProperty(
+                    )*/
+                  /*  httpsURLConnection.setRequestProperty(
                         "Accept","text/plain"
-                    )
+                    )*/
 
                     httpsURLConnection.requestMethod = "POST"
                     httpsURLConnection.doInput = true
@@ -232,7 +234,19 @@ class ExaminationActivity : AppCompatActivity() {
 
 
                     Log.d("TAG", "Link is : ${data.getString("link")}")
-                    imgurUrl = data.getString("link")
+
+                    val status = jsonObject.getJSONObject("status")
+                    val sucess = jsonObject.getJSONObject("success")
+
+                    Log.d("HAI", data.toString())
+                    Log.d("HAI", sucess.toString())
+                    Log.d("HAI", status.toString())
+
+
+
+
+
+                    //imgurUrl = data.getString("link")
                     val type = data.getString("type")
 
                     val size = data.getInt("size")
@@ -267,7 +281,7 @@ class ExaminationActivity : AppCompatActivity() {
                     Log.d("BODY FINISH", body)
 
 
-          //          loadingView.dismiss()
+                   loadingView.dismiss()
 
                     Toast.makeText(this@ExaminationActivity, "Berhasil", Toast.LENGTH_SHORT).show()
 

@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DermaFriends">
-        <activity android:name=".DiseaseByDoctorActivity"></activity>
+        <activity android:name=".DetailUserDiseaseActivity"></activity>
+        <activity android:name=".DiseaseByDoctorActivity" />
         <activity android:name=".DiseaseHistoryActivity" />
         <activity
             android:name=".SplashscreenActivity"
