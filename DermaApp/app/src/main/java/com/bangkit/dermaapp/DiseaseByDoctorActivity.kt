@@ -54,12 +54,6 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         }
         binding.edDetectionByDoctor.setText(diseaseByDoctor)
 
-        //debug
-        val uid = firebaseAuth.currentUser?.uid.toString()
-        // val key = refHistoryPenyakit.child(uid).key.toString()
-        val test = refHistoryPenyakit.child(uid).key.toString()
-        //Log.d("THIS", test)
-
         refHistoryPenyakit.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot.children
@@ -129,12 +123,8 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         val idKeyImage = intent.getStringExtra(ID_IMAGE).toString()
         val treatment = binding.edRecommendationTreatment.text.toString().trim()
 
-
-        //val idDisease = refHistoryPenyakit.
-        //Log.d("THIS", idDisease.toString())
         Log.d("THIS", idKeyImage)
 
-        //val mhsId = ref.push().key
         val historyPenyakit = HistoryPenyakit(
             idKeyUid, idKeyImage, imageSkin, diseaseBySystem, doctorName, diseaseByDoctor, treatment
         )

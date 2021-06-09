@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -20,16 +19,9 @@ import androidx.core.content.ContextCompat
 import com.bangkit.dermaapp.R
 import com.bangkit.dermaapp.databinding.ActivityRetrofitExaminationBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
-import com.bangkit.dermaapp.useretrofit.ApiConfig.getRetrofit
 import com.bangkit.dermaapp.retrofit.ApiService
 import com.bangkit.dermaapp.retrofit.ImageResponse
-import com.bangkit.dermaapp.testretrofit.Config
-import com.bangkit.dermaapp.testretrofit.ResponseTest
-import com.bangkit.dermaapp.testretrofit.ResponseTest2
-import com.bangkit.dermaapp.testretrofit.Service
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.snackbar.Snackbar
+import com.bangkit.dermaapp.useretrofit.ApiConfig.getRetrofit
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -51,8 +43,6 @@ class RetrofitExaminationActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
 
-
-
     companion object {
         const val CAMERA_PERMISSION_CODE = 600
         const val CAMERA_REQUEST_CODE = 666
@@ -72,7 +62,9 @@ class RetrofitExaminationActivity : AppCompatActivity() {
 
         //refUser = FirebaseDatabase.getInstance("https://b21-cap0391-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
 
-        refHistoryPenyakit = FirebaseDatabase.getInstance("https://b21-cap0391-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("riwayat_penyakit")
+        refHistoryPenyakit =
+            FirebaseDatabase.getInstance("https://b21-cap0391-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("riwayat_penyakit")
 
         Log.d("RDB", FirebaseDatabase.getInstance().reference.toString())
 
@@ -261,44 +253,85 @@ class RetrofitExaminationActivity : AppCompatActivity() {
 
                     val link = dataSemua?.data?.link.toString()
 
-                    binding.tvDiseaseName.text = link
                     // save to database
+                    /*                  val kodePenyakit = 0
+                                      val kodePenyakitString = kodePenyakit.toString()
+
+                                      if(kodePenyakitString == "0"){
+                                           binding.tvDiseaseName.text = "Biduran"
+                                           }*/
 /*
 
-                    Glide.with(this@RetrofitExaminationActivity)
-                        .load(link)
-                        .apply(RequestOptions().override(200, 200))
-                        .error(R.drawable.ic_launcher_background)
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .into(binding.imgSegmentation)
 */
-
-                  //  saveDataProto()
-
-                    //saveUser()
-
                     //save history
+//                     persiapan klo api nya dah siap.
+//                     val kodePenyakit = respone.body()?.data?.kode.toString()
+//
+//                     if(kodePenyakit == "0"){
+//                     binding.tvDiseaseName.text = "Biduran"
+//                     }
+//
+//                     if(kodePenyakit == "1"){
+//                     binding.tvDiseaseName.text = "Jerawat"
+//                     }
+//
+//                     if(kodePenyakit == "2"){
+//                     binding.tvDiseaseName.text = "Panu"
+//                     }
+//
+//                     if(kodePenyakit == "3"){
+//                     binding.tvDiseaseName.text = "Kudis"
+//                     }
+
+
+                    /*val kodePenyakit = respone.body()?.data?.kode.toString
+
+                    if(kodePenyakit == "0"){
+                        binding.tvDiseaseName.text = "Biduran"
+                    } else if(kodePenyakit == "1"){
+                        binding.tvDiseaseName.text = "Jerawat"
+                    } else if(kodePenyakit == "2"){
+                        binding.tvDiseaseName.text = "Panu"
+                    } else if(kodePenyakit == "3"){
+                        binding.tvDiseaseName.text = "Kudis"
+                    } else {
+                        binding.tvDiseaseName.text = "Tidak terdeteksi"
+                    }*/
+
 
                     val uid = firebaseAuth.currentUser?.uid.toString()
                     val imageSkin = link
-                    val diseaseBySystem = "Dummy Scabies"
+                    //val diseaseBySystemTest = binding.tvDiseaseName.text.toString()
+                    //catatan : blum ada apinya
+
+                    //dummy
+                    val diseaseBySystem = "Kudis"
                     val doctorName = ""
                     val diseaseByDoctor = ""
                     val recommendationTreatment = ""
+
+                    binding.tvDiseaseName.text = diseaseBySystem
 
                     val idDisease = refHistoryPenyakit.push().key
 
                     //val mhsId = ref.push().key
                     val historyPenyakit = HistoryPenyakit(
-                        uid,idDisease,imageSkin,diseaseBySystem, doctorName, diseaseByDoctor, recommendationTreatment
+                        uid,
+                        idDisease,
+                        imageSkin,
+                        diseaseBySystem,
+                        doctorName,
+                        diseaseByDoctor,
+                        recommendationTreatment
                     )
 
-                    refHistoryPenyakit.child(uid).child(idDisease!!).setValue(historyPenyakit).addOnCompleteListener {
-                        //jika data berhasil ditambahkan
-                        //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
-                        Log.d("THIS", "data berhasil ditambahkan")
-                        loadingView.dismiss()
-                    }
+                    refHistoryPenyakit.child(uid).child(idDisease!!).setValue(historyPenyakit)
+                        .addOnCompleteListener {
+                            //jika data berhasil ditambahkan
+                            //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
+                            Log.d("THIS", "data berhasil ditambahkan")
+                            loadingView.dismiss()
+                        }
 
 
                 } catch (e: Exception) {

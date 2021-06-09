@@ -1,6 +1,5 @@
 package com.bangkit.dermaapp.testretrofit
 
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,13 +15,11 @@ object Config {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client: OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
-
             .build()
 
 
         mRetrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

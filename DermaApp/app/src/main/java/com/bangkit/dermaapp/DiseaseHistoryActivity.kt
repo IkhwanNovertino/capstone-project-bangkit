@@ -9,7 +9,6 @@ import com.bangkit.dermaapp.databinding.ActivityDiseaseHistoryBinding
 import com.bangkit.dermaapp.history.adapter.HistoryAllUserAdapter
 import com.bangkit.dermaapp.history.adapter.HistoryUserAdapter
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -47,15 +46,11 @@ class DiseaseHistoryActivity : AppCompatActivity() {
         refAllHistory = FirebaseDatabase.getInstance(FIREBASE_URL).getReference("riwayat_penyakit")
         refUser = FirebaseDatabase.getInstance(FIREBASE_URL).getReference("users")
 
-
         roleUser()
-
-
-        //testRecyclerView()
 
         binding.btnDeleted.setOnClickListener {
             clearHistory()
-           historyUserAdapter.clearHistory()
+            historyUserAdapter.clearHistory()
         }
 
 
@@ -93,14 +88,6 @@ class DiseaseHistoryActivity : AppCompatActivity() {
                     val BA = historyAllUserAdapter.setHistoryAllUsers(historyPenyakitListArray)
                     Log.d("TAGBA", BA.toString())
                     Log.d("TAGBA", historyPenyakitListArray.toString())
-                    /*   val adapterHistoryPenyakit = HistoryAdapter(
-                           this@DiseaseHistoryActivity,
-                           R.layout.item_riwayat,
-                           historyPenyakitListArray
-                       )
-                       binding.lvHistory.adapter = adapterHistoryPenyakit*/
-
-
                 }
 
             }
@@ -218,6 +205,5 @@ class DiseaseHistoryActivity : AppCompatActivity() {
 
     private fun clearHistory() {
         refHistoryByUser.removeValue()
-
     }
 }

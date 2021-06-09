@@ -12,7 +12,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
@@ -215,10 +214,6 @@ class ProfileUserDialogFragment : DialogFragment() {
 
     private fun logout() {
         fbAuth.signOut()
-        /*Intent(this, MainActivity::class.java).also {
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(it)
-        }*/
         activity?.finish()
     }
 

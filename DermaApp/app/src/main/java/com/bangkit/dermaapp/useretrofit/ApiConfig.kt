@@ -5,6 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+//simulasi upload image
 object ApiConfig {
     private const val BASE_URL = "https://api.imgur.com/3/"
     private var mRetrofit: Retrofit? = null

@@ -9,9 +9,8 @@
 
     <ImageView
         android:id="@+id/img_indication"
-        android:layout_width="331dp"
+        android:layout_width="0dp"
         android:layout_height="251dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +21,7 @@
         android:id="@+id/btn_gallery"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="157dp"
-        android:layout_height="66dp"
+        android:layout_height="54dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -36,7 +35,7 @@
         android:id="@+id/btn_camera"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="155dp"
-        android:layout_height="66dp"
+        android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:text="@string/camera"
         app:icon="@drawable/ic_baseline_photo_camera_24"
@@ -59,7 +58,7 @@
     <Button
         android:id="@+id/btn_prediction"
         android:layout_width="0dp"
-        android:layout_height="66dp"
+        android:layout_height="54dp"
 
         android:text="@string/prediction"
         app:layout_constraintEnd_toEndOf="@+id/btn_camera"

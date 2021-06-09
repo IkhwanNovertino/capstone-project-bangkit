@@ -23,9 +23,6 @@ class HistoryAllUserAdapter : RecyclerView.Adapter<HistoryAllUserAdapter.History
             this.listHistory.addAll(history)
         notifyDataSetChanged()
 
-        //if (history == null) return
-
-
     }
 
 

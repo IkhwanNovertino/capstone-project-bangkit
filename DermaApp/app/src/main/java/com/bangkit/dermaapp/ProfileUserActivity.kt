@@ -6,12 +6,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bangkit.dermaapp.DiseaseHistoryActivity.Companion.FIREBASE_URL
@@ -196,15 +195,11 @@ class ProfileUserActivity : AppCompatActivity() {
 
         }
 
-        //val mhsId = ref.push().key
-
-
         val user = User(
             uid,nama,role
         )
         refUser.child(uid).setValue(user).addOnCompleteListener {
             Log.d("CHECK","Berhasil")
-            //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
         }
 
 

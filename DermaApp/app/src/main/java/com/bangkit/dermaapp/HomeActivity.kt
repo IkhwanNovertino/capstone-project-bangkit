@@ -2,19 +2,15 @@ package com.bangkit.dermaapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivityHomeBinding
-import com.bangkit.dermaapp.notretrofit.ExaminationActivity
 import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivityHomeBinding
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +24,6 @@ class HomeActivity : AppCompatActivity() {
 
         showUser()
 
-
-        //val historyId = HistoryPenyakit().id.toString()
 
         binding.btnCamera.setOnClickListener {
             //test retrofit mechanism scan disease with retrofit
@@ -55,9 +49,6 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
-
-
-
 
     private fun showUser() {
         val user = firebaseAuth.currentUser

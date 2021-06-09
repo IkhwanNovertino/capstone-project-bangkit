@@ -10,7 +10,6 @@ import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.DETECT_SYSTEM
 import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.IMAGE_DETAIL
 import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.NAME_DOCTOR_DETAIL
 import com.bangkit.dermaapp.DetailUserDiseaseActivity.Companion.TREATMENT
-import com.bangkit.dermaapp.DiseaseByDoctorActivity
 import com.bangkit.dermaapp.R
 import com.bangkit.dermaapp.databinding.ItemRiwayatBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
@@ -26,9 +25,6 @@ class HistoryUserAdapter : RecyclerView.Adapter<HistoryUserAdapter.HistoryViewHo
         this.listHistory.clear()
         this.listHistory.addAll(history)
         notifyDataSetChanged()
-
-        //if (history == null) return
-
 
     }
 
