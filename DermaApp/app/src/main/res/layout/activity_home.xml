@@ -103,7 +103,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:padding="4dp"
-                android:text="Ambil Foto"
+                android:text="Go"
                 app:icon="@drawable/ic_arrow_forward"
                 app:iconGravity="end"
                 app:iconPadding="1dp" />

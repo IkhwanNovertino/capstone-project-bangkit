@@ -236,6 +236,7 @@ class RetrofitExaminationActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
+        loadingView.show()
         val title = "IMG_${System.currentTimeMillis()}"
 
         val api = getRetrofit()!!.create(ApiService::class.java)
@@ -296,6 +297,7 @@ class RetrofitExaminationActivity : AppCompatActivity() {
                         //jika data berhasil ditambahkan
                         //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
                         Log.d("THIS", "data berhasil ditambahkan")
+                        loadingView.dismiss()
                     }
 
 
