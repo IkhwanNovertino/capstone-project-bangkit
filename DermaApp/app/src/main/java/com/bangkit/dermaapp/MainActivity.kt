@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    showSnackbarMessage("Berhasil login")
                     Intent(this, HomeActivity::class.java).also {
                         loading(false)
 
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 } else {
-                    Toast.makeText(this, "Email atau Password salah", Toast.LENGTH_LONG).show()
+                    showSnackbarMessage("Email atau Password salah")
                     loading(false)
                 }
             }
@@ -100,6 +102,10 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
     }
 
 

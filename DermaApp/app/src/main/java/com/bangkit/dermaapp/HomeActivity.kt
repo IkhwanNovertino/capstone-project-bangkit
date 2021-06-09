@@ -2,11 +2,13 @@ package com.bangkit.dermaapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivityHomeBinding
 import com.bangkit.dermaapp.notretrofit.ExaminationActivity
 import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class HomeActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         showUser()
-
 
 
         //val historyId = HistoryPenyakit().id.toString()
@@ -85,5 +86,4 @@ class HomeActivity : AppCompatActivity() {
             ProfileUserDialogFragment::class.java.simpleName
         )
     }
-
 }

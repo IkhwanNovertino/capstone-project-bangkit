@@ -209,10 +209,6 @@ class RetrofitExaminationActivity : AppCompatActivity() {
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 
-    private fun showSnackbarMessage(message: String) {
-        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
-    }
-
     private val image: String
         get() {
             val baos = ByteArrayOutputStream()

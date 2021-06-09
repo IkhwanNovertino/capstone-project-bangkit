@@ -17,9 +17,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.bangkit.dermaapp.databinding.FragmentProfileUserDialogBinding
-import com.bangkit.dermaapp.notretrofit.ExaminationActivity
-import com.bangkit.dermaapp.useretrofit.RetrofitExaminationActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
@@ -74,18 +73,15 @@ class ProfileUserDialogFragment : DialogFragment() {
             }
 
 
-
-
-
         }
 
         binding.tvSendLinkVerifEmail.setOnClickListener {
             loading(true)
-            user?.sendEmailVerification()?.addOnCompleteListener {task ->
-                if (task.isSuccessful){
-                    Toast.makeText(activity, "Link Verifikasi sudah dikirim ke email", Toast.LENGTH_LONG).show()
+            user?.sendEmailVerification()?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showSnackbarMessage("Link verifikasi sudah dikirim ke email")
                 } else {
-                    Toast.makeText(activity, task.exception?.message.toString(), Toast.LENGTH_LONG).show()
+                    showSnackbarMessage("Gagal kirim link verifikasi ke email")
                 }
 
                 loading(false)
@@ -114,13 +110,14 @@ class ProfileUserDialogFragment : DialogFragment() {
                 .build().also {
                     user?.updateProfile(it)?.addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Toast.makeText(activity, "Profile Update", Toast.LENGTH_SHORT).show()
+                            showSnackbarMessage("Data profil berhasil di ubah")
                             Intent(activity, HomeActivity::class.java).also { intent ->
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                             }
                         } else {
-                            Toast.makeText(activity, "Gagal Update", Toast.LENGTH_SHORT).show()
+                            showSnackbarMessage("Data profil tidak berhasil dirubah")
                         }
                     }
                 }
@@ -142,10 +139,10 @@ class ProfileUserDialogFragment : DialogFragment() {
             ActivityCompat.requestPermissions(
                 activity!!,
                 arrayOf(Manifest.permission.CAMERA),
-                PER_CAMERA_USER_DIALOG)
+                PER_CAMERA_USER_DIALOG
+            )
         }
     }
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -160,7 +157,8 @@ class ProfileUserDialogFragment : DialogFragment() {
     private fun uploadImageUser(imageBitmap: Bitmap) {
         loading(true)
         val baos = ByteArrayOutputStream()
-        val ref = FirebaseStorage.getInstance().reference.child("img/${FirebaseAuth.getInstance().currentUser?.uid}")
+        val ref =
+            FirebaseStorage.getInstance().reference.child("img/${FirebaseAuth.getInstance().currentUser?.uid}")
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val image = baos.toByteArray()
 
@@ -185,8 +183,8 @@ class ProfileUserDialogFragment : DialogFragment() {
         }
     }
 
-    private fun statusVerifEmail(status: Boolean){
-        if (status){
+    private fun statusVerifEmail(status: Boolean) {
+        if (status) {
             binding.imgVerifUser.setImageResource(R.drawable.ic_verified_user)
             binding.tvStatusEmail.text = "Status Email: Sudah Terverifikasi"
         } else {
@@ -208,15 +206,15 @@ class ProfileUserDialogFragment : DialogFragment() {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, REQ_CAMERA_USER_DIALOG)
             } else {
-                Toast.makeText(activity, "Pastikan sudah izin pemission camera", Toast.LENGTH_LONG).show()
+                showSnackbarMessage("Belum ada izin menggunakan camera")
             }
 
         }
     }
 
 
-    private fun logout(){
-      fbAuth.signOut()
+    private fun logout() {
+        fbAuth.signOut()
         /*Intent(this, MainActivity::class.java).also {
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(it)
@@ -224,6 +222,9 @@ class ProfileUserDialogFragment : DialogFragment() {
         activity?.finish()
     }
 
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
+    }
 
 
 }

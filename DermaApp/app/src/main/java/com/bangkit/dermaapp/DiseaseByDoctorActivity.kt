@@ -2,11 +2,13 @@ package com.bangkit.dermaapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.DiseaseHistoryActivity.Companion.FIREBASE_URL
 import com.bangkit.dermaapp.databinding.ActivityDiseaseByDoctorBinding
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -140,9 +142,13 @@ class DiseaseByDoctorActivity : AppCompatActivity() {
         refHistoryPenyakit.child(idKeyUid).child(idKeyImage).setValue(historyPenyakit)
             .addOnCompleteListener {
                 //jika data berhasil ditambahkan
-                //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
-                Log.d("THIS", "data berhasil diUpdate")
+                showSnackbarMessage("Berhasil dikirim ke user")
+                Log.d("THIS", "data berhasil disimpan")
             }
 
+    }
+
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
     }
 }

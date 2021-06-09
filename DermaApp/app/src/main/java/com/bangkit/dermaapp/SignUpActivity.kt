@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.dermaapp.databinding.ActivitySignUpBinding
 import com.bangkit.dermaapp.history.entity.User
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -60,12 +61,14 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     loading(false)
+                    showSnackbarMessage("Berhasil mendaftar")
                     Intent(this, ProfileUserActivity::class.java).also {
                         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(it)
                     }
                     Log.e("TASK MESSAGE", "successful")
                 } else {
+                    showSnackbarMessage("Gagal Mendaftar")
                     Log.e("TASK MESSAGE", "failed")
                     loading(false)
                 }
@@ -78,6 +81,10 @@ class SignUpActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
     }
 
 

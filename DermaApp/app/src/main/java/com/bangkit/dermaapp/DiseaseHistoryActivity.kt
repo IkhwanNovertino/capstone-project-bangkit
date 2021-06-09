@@ -9,6 +9,7 @@ import com.bangkit.dermaapp.databinding.ActivityDiseaseHistoryBinding
 import com.bangkit.dermaapp.history.adapter.HistoryAllUserAdapter
 import com.bangkit.dermaapp.history.adapter.HistoryUserAdapter
 import com.bangkit.dermaapp.history.entity.HistoryPenyakit
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -217,7 +218,6 @@ class DiseaseHistoryActivity : AppCompatActivity() {
 
     private fun clearHistory() {
         refHistoryByUser.removeValue()
+
     }
-
-
 }

@@ -18,6 +18,7 @@ import com.bangkit.dermaapp.DiseaseHistoryActivity.Companion.FIREBASE_URL
 import com.bangkit.dermaapp.databinding.ActivityProfileUserBinding
 import com.bangkit.dermaapp.history.entity.User
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
@@ -89,13 +90,12 @@ class ProfileUserActivity : AppCompatActivity() {
                     loading(true)
                     user?.updateProfile(it)?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Profile Update", Toast.LENGTH_SHORT).show()
                             Intent(this, HomeActivity::class.java).also { intent ->
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                             }
                         } else {
-                            Toast.makeText(this, "Gagal Update", Toast.LENGTH_SHORT).show()
+                            showSnackbarMessage("Gagal")
                         }
                         loading(false)
                     }
@@ -141,7 +141,7 @@ class ProfileUserActivity : AppCompatActivity() {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, REQ_CAMERA_USER)
             } else {
-                Toast.makeText(this, "BLM ADA PERMISSION KK", Toast.LENGTH_LONG).show()
+                showSnackbarMessage("Belum ada permission camera")
             }
 
         }
@@ -203,10 +203,14 @@ class ProfileUserActivity : AppCompatActivity() {
             uid,nama,role
         )
         refUser.child(uid).setValue(user).addOnCompleteListener {
-            //jika data berhasil ditambahkan
-            Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
+            Log.d("CHECK","Berhasil")
+            //Toast.makeText(applicationContext, "Data berhasil ditambahkan :)", Toast.LENGTH_SHORT).show()
         }
 
 
+    }
+
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
     }
 }

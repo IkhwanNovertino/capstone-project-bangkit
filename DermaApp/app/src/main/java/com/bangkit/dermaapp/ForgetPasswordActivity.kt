@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import com.bangkit.dermaapp.databinding.ActivityForgetPasswordBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgetPasswordActivity : AppCompatActivity() {
@@ -28,13 +30,13 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
             FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { task ->
                 if (task.isSuccessful){
-                    Toast.makeText(this,"Password dikirim ke email",Toast.LENGTH_SHORT).show()
+                    showSnackbarMessage("Password berhasil dikirim ke email")
                     Intent(this, MainActivity::class.java).also {
                         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(it)
                     }
                 } else {
-                    Toast.makeText(this,"Gagal",Toast.LENGTH_SHORT).show()
+                    showSnackbarMessage("Gagal mengirim ke email")
                 }
             }
 
@@ -42,5 +44,9 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun showSnackbarMessage(message: String) {
+        Snackbar.make(binding?.root as View, message, Snackbar.LENGTH_SHORT).show()
     }
 }
