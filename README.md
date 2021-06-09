@@ -16,3 +16,9 @@
 6. Create multirole user and different access based on role user using Realtime Database.
 7. Create menu disease skin history
 8. Create mechanism for doctor give recommendation disease skin based on user problem using Realtime Database.
+
+## ML Steps
+1. Acquire dataset
+2. Train baseline model
+3. Do transfer learning
+4. Test and deploy the model
